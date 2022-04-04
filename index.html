@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script
+      src="https://kit.fontawesome.com/c88e9cd648.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="css.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <!-- 
+
+    HEAD
+
+ -->
+
+  <!-- czcionka Montserrat -->
+
+  <!-- dodaj swój kit Font Awesome, jeśli chcesz mieć ikony ☑️ oraz ✖️ -->
+
+  <!-- 
+
+    BODY
+
+ -->
+
+  <body>
+    <div class="pc-builder">
+      <div class="header">
+        <h2 class="secondary-header">PC Builder</h2>
+      </div>
+      <div class="creating-div main">
+        <div class="input-div">
+          <p class="input-info">Nazwa pozycji</p>
+          <input
+            class="input-field name-input"
+            type="text"
+            placeholder="Podaj nazwę podzespołu: "
+          />
+        </div>
+        <div class="input-div">
+          <p class="input-info">Opis</p>
+          <input
+            class="input-field info-input"
+            type="text"
+            placeholder="Podaj markę i model produktu"
+          />
+        </div>
+        <div class="input-div">
+          <p class="input-info">Cena w złotłwkach</p>
+          <input
+            class="input-field price-input"
+            type="number"
+            placeholder="Podaj cenę (wyłącznie cyfry)"
+          />
+        </div>
+        <div class="input-div">
+          <p class="input-info">paragraph</p>
+          <select
+            class="select-field input-field"
+            type="number"
+            placeholder="sgagsagsa"
+          >
+            <option value="noAnswer">Wybierz kategorię</option>
+            <option value="Podzespoły komputera">Podzespoły komputera</option>
+            <option value="Urządzenia peryferyjne">
+              Urządzenia peryferyjne
+            </option>
+            <option value="oprogramowanie">oprogramowanie</option>
+            <option value="inne">inne</option>
+          </select>
+        </div>
+        <button class="add-item-btn"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="table-div">
+        <table class="table parameters">
+          <tr>
+            <th>Nazwa</th>
+            <th>Opis</th>
+            <th>Cena</th>
+            <th>Kategoria</th>
+          </tr>
+          <tr id="1">
+            <td>przykladowa nazwa</td>
+            <td>rzykladowy opis</td>
+            <td class="price">5555</td>
+            <td>przykl kategoria</td>
+            <td class="buttons">
+              <button class="delete-button">
+                <i class="fas fa-times"></i>
+              </button>
+            </td>
+          </tr>
+
+          <tr id="2">
+            <td>przykladowa nazwa</td>
+            <td>rzykladowy opis</td>
+            <td class="price">555</td>
+            <td>przykl kategoria</td>
+            <td class="buttons">
+              <button class="delete-button">
+                <i class="fas fa-times"></i>
+              </button>
+            </td>
+          </tr>
+
+          <tr id="3">
+            <td>przykladowa nazwa</td>
+            <td>rzykladowy opis</td>
+            <td class="price">200</td>
+            <td>przykl kategoria</td>
+            <td class="buttons">
+              <button class="delete-button">
+                <i class="fas fa-times"></i>
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

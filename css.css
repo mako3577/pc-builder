@@ -1,0 +1,135 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+:root {
+  --deep-dark: rgb(26, 26, 26);
+  --light-dark: rgb(79, 82, 92);
+  --light-blue: rgb(0, 132, 255);
+  --dark-blue: rgb(2, 84, 161);
+  --light: rgb(245, 245, 245);
+}
+.secondary-header {
+  color: white;
+  font-size: 40px;
+}
+
+.pc-builder {
+  /* height: 700px; */
+  width: 1000px;
+  margin: 100px auto;
+  background-color: aliceblue;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.305);
+}
+
+.header {
+  display: flex;
+  background-color: var(--light-blue);
+  height: 120px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px 15px 0 0;
+}
+
+/* INPUTS */
+
+.creating-div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 50px;
+  row-gap: 80px;
+  padding-bottom: 80px;
+  align-items: center;
+  padding: 40px 80px;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.input-info {
+  font-size: 20px;
+}
+
+.input-field,
+.select-field {
+  height: 35px;
+  width: 100%;
+}
+
+/* LIST CONTAINING ALL COMPUTERS */
+.listItems {
+  display: flex;
+  grid-column: 1/-1;
+  flex-direction: column;
+  font-size: 20px;
+  /* gap: 20px; */
+  list-style: none;
+}
+
+.table {
+  column-gap: 1 / -1;
+  font-size: 16px;
+  border-collapse: separate;
+  /* border-spacing: 55px 15px; */
+  width: 100%;
+}
+
+.table td {
+  text-overflow: ellipcsis;
+}
+
+.table th {
+  width: 25%;
+  text-align: left;
+  height: 50px;
+  background-color: rgb(173, 197, 239);
+  justify-items: center;
+  padding-left: 8px;
+}
+.table td {
+  padding: 5px 45px 5px 8px;
+}
+
+.table tr:nth-of-type(even) {
+  background-color: rgb(228, 238, 255);
+}
+.table th:nth-child(3) {
+  width: fit-content;
+}
+.table td:nth-child(3) {
+  width: fit-content;
+}
+
+.computer {
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 0;
+  display: flex;
+}
+
+td.buttons {
+  display: flex;
+  justify-content: space-around;
+  gap: 5px;
+  height: 40px;
+  /* width: 90px; */
+  padding: 4px 8px;
+}
+
+td:last-child {
+  /* background-color: rgba(41, 94, 143, 0.382); */
+}
+
+button {
+  width: 45px;
+}
+
+.add-item-btn {
+  grid-column: 1/-1;
+  width: 70%;
+  height: 60px;
+  justify-self: center;
+}
