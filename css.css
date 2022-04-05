@@ -4,6 +4,12 @@
   padding: 0;
   font-family: sans-serif;
 }
+.flex {
+  display: flex;
+}
+.space-btw {
+  justify-content: space-between;
+}
 
 :root {
   --deep-dark: rgb(26, 26, 26);
@@ -28,7 +34,10 @@
 
 .header {
   display: flex;
-  background-color: var(--light-blue);
+  background: rgb(10, 58, 149);
+  background: linear-gradient(90deg, rgba(10, 58, 149, 1) 13%, rgba(0, 212, 255, 1) 99%);
+  /* (var(--light-blue), red); */
+
   height: 120px;
   align-items: center;
   justify-content: center;
@@ -47,6 +56,8 @@
   padding: 40px 80px;
   justify-content: center;
   margin-bottom: 40px;
+
+  position: relative;
 }
 
 .input-info {
@@ -123,8 +134,41 @@ td:last-child {
   /* background-color: rgba(41, 94, 143, 0.382); */
 }
 
+/* basic width od the table-inside buttons */
 button {
   width: 45px;
+}
+
+/* universal style for all buttons */
+.button {
+  border: none;
+  box-shadow: 0px 0px 3px #0a3b9577;
+  background-color: #0960d311;
+  transition: all 0.3s;
+}
+
+.button:hover {
+  background-color: #0961d331;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.801);
+}
+
+.button:active {
+  background-color: #0961d356;
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.801);
+  transform: scale(101%);
+}
+
+.edit-button {
+  position: absolute;
+  width: 20%;
+  height: 100%;
+  left: 80%;
+  top: 0;
+  display: none;
+}
+
+button i {
+  font-size: 16px;
 }
 
 .add-item-btn {
@@ -132,4 +176,56 @@ button {
   width: 70%;
   height: 60px;
   justify-self: center;
+}
+
+.add-btn-text {
+  font-size: 20px;
+  font-weight: 600;
+  color: #222;
+}
+
+.empty-list-info {
+  display: none;
+  font-size: 20px;
+  padding: 13px 26px;
+  text-align: center;
+}
+
+.empty-list-info.visible {
+  display: block;
+}
+
+/* category settings */
+.category-settings-div {
+  position: absolute;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  height: 110%;
+  width: 100%;
+  left: 100%;
+
+  background: rgba(255, 255, 255, 0.829);
+  backdrop-filter: blur(3px);
+  transition: transform 1s;
+}
+
+.category-settings-div.active {
+  transform: translateX(-100%);
+}
+
+.categories-list {
+  flex-direction: column;
+  padding: 15px;
+  padding-top: 30px;
+  gap: 15px;
+}
+
+.categories-list li:first-child {
+  display: none;
+}
+
+.delete-category.button {
+  height: 25px;
+  width: 30px;
 }

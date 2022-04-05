@@ -8,8 +8,11 @@ const delBtns = document.querySelectorAll(".delete-button");
 const delBtn = document.querySelector(".delete-button");
 const btnsDiv = document.querySelector(".buttons");
 const firstOption = document.querySelector("option");
+const editBtn = document.querySelector(".edit-button");
 // 4 main inputs from top side of the app
 const mainInputs = document.querySelectorAll(".input-field");
+const categoriesList = document.querySelector(".categories-list");
+const categorySettingsBtn = document.querySelector(".category-settings-btn");
 let id = 3;
 
 const checkClick = function (e) {
@@ -84,6 +87,8 @@ const addItem = function () {
     priceInput.value = "";
     infoInput.value = "";
     // selectField.value = firstOption;   - not working
+
+    checkIfEmpty();
   }
 };
 
@@ -110,25 +115,28 @@ const editFunction = function (e) {
       editInput.type = "number";
     }
     // create button to confirm changes
-    editBtn = document.createElement("button");
-    editBtn.style.position = "absolute";
-    editBtn.style.width = "20%";
-    editBtn.style.height = "100%";
-    editBtn.style.left = "80%";
-    editBtn.style.top = "0";
+    editBtn.style.display = "block";
+    // editBtn.style.position = "absolute";
+    // editBtn.style.width = "20%";
+    // editBtn.style.height = "100%";
+    // editBtn.style.left = "80%";
+    // editBtn.style.top = "0";
     editBtn.classList.add("activeEdit");
+    // editBtn.innerHTML += '<i class="fa-solid fa-square-check"></i>';
+    // document.querySelector(".fa-square-check").style.height = "100%";
     // append both button and input as a children to target column
     e.target.appendChild(editInput);
     e.target.appendChild(editBtn);
 
     const editConfirm = function () {
-      e.target.innerText = editInput.value;
+      console.log(e.target);
+      e.target.closest("td").innerText = editInput.value;
       editInput.remove();
       editBtn.remove();
     };
 
     editBtn.addEventListener("click", editConfirm);
-    document.addEventListener("keypress", function (e) {
+    e.target.addEventListener("keypress", function (e) {
       if (e.key === "Enter") {
         editConfirm();
       }
@@ -151,6 +159,65 @@ const deleteItem = function (e) {
   gParent = e.target.closest("tr");
   console.log(gParent);
   gParent.remove();
+  checkIfEmpty();
+};
+
+const checkIfEmpty = function () {
+  let itemsInCol = table.querySelectorAll("tr");
+  if (itemsInCol.length <= 1) {
+    document.querySelector(".empty-list-info").classList.add("visible");
+  } else {
+    document.querySelector(".empty-list-info").classList.remove("visible");
+  }
+};
+
+const createCategoriesList = function () {
+  // clear old list
+  let categories = document.querySelectorAll(".categories-list li");
+  let categoriesAll = document.querySelectorAll(".select-field option");
+  for (category of categories) {
+    category.remove();
+  }
+  for (category of categoriesAll) {
+    console.log(category.innerText);
+    if (category.value != "noAnswer") {
+      newCategory = document.createElement("li");
+      newCategory.style.display = "flex";
+      newCategory.classList.add("space-btw");
+
+      newCategoryText = document.createElement("p");
+      newCategoryText.innerText = category.innerText;
+
+      newCategoryButton = document.createElement("button");
+      newCategoryButton.innerHTML = '<i class="fas fa-times"></i>';
+      newCategoryButton.classList.add("delete-category");
+      newCategoryButton.classList.add("button");
+      newCategoryButton.addEventListener("click", deleteCategory);
+
+      newCategory.appendChild(newCategoryText);
+      newCategory.appendChild(newCategoryButton);
+      categoriesList.appendChild(newCategory);
+    }
+  }
+};
+const deleteCategory = function (e) {
+  let liToDel = e.target.closest("li");
+
+  textInside = e.target.closest("button").previousSibling.innerText;
+  console.log(textInside);
+
+  liToDel.remove();
+
+  optionToDel = document.querySelector(`[value ='${textInside}'`);
+  optionToDel.remove();
+
+  document.querySelector(".category-settings-div").classList.toggle("active");
+};
+
+const expandCategoriesSettings = function () {
+  createCategoriesList();
+  document.querySelector(".category-settings-div").classList.toggle("active");
+  console.log("dsada");
 };
 
 //
@@ -177,6 +244,8 @@ for (input of mainInputs) {
 addBtn.addEventListener("click", addItem);
 table.addEventListener("dblclick", checkClick);
 table.addEventListener("dblclick", editFunction);
+categorySettingsBtn.addEventListener("click", expandCategoriesSettings);
+
 for (let delBtn of delBtns) {
   delBtn.addEventListener("click", deleteItem);
 }

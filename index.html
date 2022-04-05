@@ -6,10 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
-    <script
-      src="https://kit.fontawesome.com/c88e9cd648.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/c88e9cd648.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -67,22 +64,47 @@
           />
         </div>
         <div class="input-div">
-          <p class="input-info">paragraph</p>
-          <select
-            class="select-field input-field"
-            type="number"
-            placeholder="sgagsagsa"
-          >
+          <div class="flex space-btw">
+            <p class="input-info">paragraph</p>
+            <button class="button category-settings-btn">
+              <i class="fa-solid fa-list"></i>
+            </button>
+          </div>
+
+          <select class="select-field input-field" type="number" placeholder="sgagsagsa">
             <option value="noAnswer">Wybierz kategorię</option>
-            <option value="Podzespoły komputera">Podzespoły komputera</option>
-            <option value="Urządzenia peryferyjne">
-              Urządzenia peryferyjne
-            </option>
+            <option value="Podzespoly komputera">Podzespoly komputera</option>
+            <option value="Urzadzenia peryferyjne">Urzadzenia peryferyjne</option>
             <option value="oprogramowanie">oprogramowanie</option>
             <option value="inne">inne</option>
           </select>
         </div>
-        <button class="add-item-btn"><i class="fas fa-times"></i></button>
+        <button class="add-item-btn button">
+          <span class="add-btn-text">Dodaj pozycję</span>
+          <!-- <i class="fa-solid fa-plus"></i> -->
+        </button>
+        <div class="category-settings-div">
+          <ul class="categories-list flex">
+            <li class="flex space-btw">
+              <p>test1</p>
+              <button class="delete-category button">
+                <i class="fas fa-times"></i>
+              </button>
+            </li>
+            <li class="flex space-btw">
+              <p>test2</p>
+              <button class="delete-category button">
+                <i class="fas fa-times"></i>
+              </button>
+            </li>
+            <li class="flex space-btw">
+              <p>test3</p>
+              <button class="delete-category button">
+                <i class="fas fa-times"></i>
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
       <div class="table-div">
         <table class="table parameters">
@@ -98,7 +120,7 @@
             <td class="price">5555</td>
             <td>przykl kategoria</td>
             <td class="buttons">
-              <button class="delete-button">
+              <button class="delete-button button">
                 <i class="fas fa-times"></i>
               </button>
             </td>
@@ -110,7 +132,7 @@
             <td class="price">555</td>
             <td>przykl kategoria</td>
             <td class="buttons">
-              <button class="delete-button">
+              <button class="delete-button button">
                 <i class="fas fa-times"></i>
               </button>
             </td>
@@ -122,14 +144,19 @@
             <td class="price">200</td>
             <td>przykl kategoria</td>
             <td class="buttons">
-              <button class="delete-button">
+              <button class="delete-button button">
                 <i class="fas fa-times"></i>
               </button>
             </td>
           </tr>
         </table>
+        <p class="empty-list-info">Lista jest pusta. Użyj przycisku 'dodaj pozycję'</p>
       </div>
     </div>
+    <button class="button edit-button">
+      <!-- <i class="fa-solid fa-square-check"></i> -->
+      <i class="fa-solid fa-check"></i>
+    </button>
     <script src="script.js"></script>
   </body>
 </html>
