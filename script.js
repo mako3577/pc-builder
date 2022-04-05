@@ -5,7 +5,7 @@ let selectField = document.querySelector(".select-field");
 const table = document.querySelector(".table tbody");
 const addBtn = document.querySelector(".add-item-btn");
 const delBtns = document.querySelectorAll(".delete-button");
-const delBtn = document.querySelector(".delete-button");
+const delBtn = document.querySelector(".delete-button"); // check if it is neccesary here
 const btnsDiv = document.querySelector(".buttons");
 const firstOption = document.querySelector("option");
 const editBtn = document.querySelector(".edit-button");
@@ -13,6 +13,8 @@ const editBtn = document.querySelector(".edit-button");
 const mainInputs = document.querySelectorAll(".input-field");
 const categoriesList = document.querySelector(".categories-list");
 const categorySettingsBtn = document.querySelector(".category-settings-btn");
+const categorySettingsCloseBtn = document.querySelector(".close-clas-edit-btn");
+const addCatBtn = document.querySelector(".add-cat-btn");
 let id = 3;
 
 const checkClick = function (e) {
@@ -28,16 +30,16 @@ const addItem = function () {
 
   // add color border to invalid value in inputs
   if (name == "") {
-    nameInput.style.border = "3px solid red";
+    nameInput.style.border = "2px solid rgba(218, 44, 44, 0.808)";
   }
   if (info == "") {
-    infoInput.style.border = "3px solid red";
+    infoInput.style.border = "2px solid rgba(218, 44, 44, 0.808)";
   }
   if (priceInput.value.length == 0) {
-    priceInput.style.border = "3px solid red";
+    priceInput.style.border = "2px solid rgba(218, 44, 44, 0.808)";
   }
   if (selectField.value == "noAnswer") {
-    selectField.style.border = "3px solid red";
+    selectField.style.border = "2px solid rgba(218, 44, 44, 0.808)";
   }
 
   if (
@@ -77,10 +79,13 @@ const addItem = function () {
     newBtnsDiv = document.createElement("td");
     newBtnsDiv.classList.add("buttons");
 
-    const cloneDelBtn = delBtn.cloneNode("false");
-    newBtnsDiv.appendChild(cloneDelBtn);
+    const delBtn = document.createElement("button");
+    delBtn.classList.add("delete-button");
+    delBtn.classList.add("button");
+    delBtn.innerHTML = '<i class="fas fa-times"></i>';
+    newBtnsDiv.appendChild(delBtn);
 
-    cloneDelBtn.addEventListener("click", deleteItem);
+    delBtn.addEventListener("click", deleteItem);
 
     newItem.appendChild(newBtnsDiv);
     nameInput.value = "";
@@ -116,13 +121,8 @@ const editFunction = function (e) {
     }
     // create button to confirm changes
     editBtn.style.display = "block";
-    // editBtn.style.position = "absolute";
-    // editBtn.style.width = "20%";
-    // editBtn.style.height = "100%";
-    // editBtn.style.left = "80%";
-    // editBtn.style.top = "0";
+
     editBtn.classList.add("activeEdit");
-    // editBtn.innerHTML += '<i class="fa-solid fa-square-check"></i>';
     // document.querySelector(".fa-square-check").style.height = "100%";
     // append both button and input as a children to target column
     e.target.appendChild(editInput);
@@ -189,7 +189,7 @@ const createCategoriesList = function () {
       newCategoryText.innerText = category.innerText;
 
       newCategoryButton = document.createElement("button");
-      newCategoryButton.innerHTML = '<i class="fas fa-times"></i>';
+      newCategoryButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
       newCategoryButton.classList.add("delete-category");
       newCategoryButton.classList.add("button");
       newCategoryButton.addEventListener("click", deleteCategory);
@@ -211,13 +211,44 @@ const deleteCategory = function (e) {
   optionToDel = document.querySelector(`[value ='${textInside}'`);
   optionToDel.remove();
 
-  document.querySelector(".category-settings-div").classList.toggle("active");
+  // document.querySelector(".category-settings-div").classList.toggle("active");
 };
 
 const expandCategoriesSettings = function () {
   createCategoriesList();
   document.querySelector(".category-settings-div").classList.toggle("active");
-  console.log("dsada");
+};
+
+const addNewCat = function () {
+  let newCatInput = document.querySelector(".new-cat-input");
+  let newCatText = newCatInput.value;
+  let newCatLi = document.createElement("li");
+  let newP = document.createElement("p");
+  newP.innerText = newCatText;
+
+  const newButton = document.createElement("button");
+  newButton.classList.add("delete-category");
+  newButton.classList.add("button");
+  newButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+
+  newCatLi.classList.add("space-btw");
+  newCatLi.classList.add("flex");
+
+  newCat = document.createElement("option");
+  newCat.value = newCatText;
+  newCat.innerText = newCatText;
+
+  newCatLi.appendChild(newP);
+  newCatLi.appendChild(newButton);
+  categoriesList.appendChild(newCatLi);
+
+  selectField.appendChild(newCat);
+
+  newButton.addEventListener("click", deleteCategory);
+};
+
+const closeCatEdit = function () {
+  document.querySelector(".category-settings-div").classList.remove("active");
 };
 
 //
@@ -245,6 +276,8 @@ addBtn.addEventListener("click", addItem);
 table.addEventListener("dblclick", checkClick);
 table.addEventListener("dblclick", editFunction);
 categorySettingsBtn.addEventListener("click", expandCategoriesSettings);
+addCatBtn.addEventListener("click", addNewCat);
+categorySettingsCloseBtn.addEventListener("click", closeCatEdit);
 
 for (let delBtn of delBtns) {
   delBtn.addEventListener("click", deleteItem);
@@ -257,3 +290,6 @@ document.addEventListener("click", function (e) {
     return;
   } else editCancel();
 });
+
+// starting functions
+checkIfEmpty();

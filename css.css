@@ -18,9 +18,21 @@
   --dark-blue: rgb(2, 84, 161);
   --light: rgb(245, 245, 245);
 }
-.secondary-header {
+.primary-header {
   color: white;
   font-size: 40px;
+}
+
+.secondary-header {
+  color: #222;
+  font-weight: 600;
+  font-size: 35px;
+}
+
+.tertiary-header {
+  font-size: 25px;
+  padding: 15px;
+  color: #333;
 }
 
 .pc-builder {
@@ -30,6 +42,8 @@
   background-color: aliceblue;
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.305);
+  overflow-x: hidden;
+  position: relative;
 }
 
 .header {
@@ -49,6 +63,7 @@
 .creating-div {
   display: grid;
   grid-template-columns: 1fr 1fr;
+
   column-gap: 50px;
   row-gap: 80px;
   padding-bottom: 80px;
@@ -171,14 +186,14 @@ button i {
   font-size: 16px;
 }
 
-.add-item-btn {
+.big-btn {
   grid-column: 1/-1;
   width: 70%;
   height: 60px;
   justify-self: center;
 }
 
-.add-btn-text {
+.big-btn-text {
   font-size: 20px;
   font-weight: 600;
   color: #222;
@@ -199,33 +214,88 @@ button i {
 .category-settings-div {
   position: absolute;
   display: grid;
+  column-gap: 35px;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: 125px 0fr 50px;
 
-  height: 110%;
+  height: 100%;
   width: 100%;
   left: 100%;
+  opacity: 0;
 
-  background: rgba(255, 255, 255, 0.829);
-  backdrop-filter: blur(3px);
-  transition: transform 1s;
+  background: rgb(255, 255, 255);
+  /* backdrop-filter: blur(3px); -------- animations is not smooth*/
+  transition: all 0.5s;
 }
 
 .category-settings-div.active {
   transform: translateX(-100%);
+  opacity: 1;
+  z-index: 5;
 }
 
 .categories-list {
   flex-direction: column;
   padding: 15px;
-  padding-top: 30px;
-  gap: 15px;
+  padding-top: 25px;
 }
 
+/* hide 'wybierz kategorię' */
 .categories-list li:first-child {
   display: none;
+}
+
+.categories-list li:nth-child(odd) {
+  background-color: rgba(102, 165, 238, 0.171);
+}
+.categories-list li {
+  padding: 4px 0 4px 4px;
+  align-items: center;
 }
 
 .delete-category.button {
   height: 25px;
   width: 30px;
+}
+
+.category-settings-header {
+  grid-column: 1/-1;
+  text-align: center;
+  padding-top: 4%;
+  height: 125px;
+  color: black;
+  background-color: rgba(102, 102, 102, 0.247);
+}
+
+.wrap-cat {
+  flex-direction: column;
+}
+
+.add-cat-btn {
+  height: 30px;
+  width: fit-content;
+  padding: 0 5px;
+  font-weight: 600;
+  color: #444;
+}
+
+.new-cat-input {
+  width: 60%;
+  padding-left: 3px;
+}
+
+.input-cat-div {
+  padding-left: 15px;
+  padding-right: 3px;
+}
+
+.close-clas-edit-btn.button {
+  margin-top: 50px;
+  grid-column: 1/-1;
+  width: 60%;
+  justify-self: center;
+}
+
+.wrap-for-button {
+  position: relative;
 }

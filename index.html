@@ -35,8 +35,45 @@
 
   <body>
     <div class="pc-builder">
+      <div class="wrap">
+      <div class="category-settings-div">
+        <div class="category-settings-header">
+          <h2 class="secondary-header">Zarządzanie kategoriami</h2>
+        </div>
+        <div class="wrap-cat flex">
+          <h3 class="tertiary-header">Lista kategorii:</h3>
+          <ul class="categories-list flex">
+            <li class="flex space-btw">
+              <p>test1</p>
+              <button class="delete-category button">
+                <i class="fas fa-times"></i>
+              </button>
+            </li>
+            <li class="flex space-btw">
+              <p>test2</p>
+              <button class="delete-category button">
+                <i class="fas fa-times"></i>
+              </button>
+            </li>
+            <li class="flex space-btw">
+              <p>test3</p>
+              <button class="delete-category button">
+                <i class="fas fa-times"></i>
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div class="wrap-cat flex">
+          <h3 class="tertiary-header">Dodaj kategorię:</h3>
+          <div class="wrap flex input-cat-div">
+            <input class="new-cat-input" type="text" placeholder="Podaj nazwę nowej kategorii" />
+            <button class="add-cat-btn button">Dodaj kategorię</button>
+          </div>
+        </div>
+        <button class="close-clas-edit-btn button big-btn"><span class="big-btn-text">Zakończ edycję</span></button>
+      </div>
       <div class="header">
-        <h2 class="secondary-header">PC Builder</h2>
+        <h1 class="primary-header">PC Builder</h1>
       </div>
       <div class="creating-div main">
         <div class="input-div">
@@ -65,7 +102,7 @@
         </div>
         <div class="input-div">
           <div class="flex space-btw">
-            <p class="input-info">paragraph</p>
+            <p class="input-info">Kategoria</p>
             <button class="button category-settings-btn">
               <i class="fa-solid fa-list"></i>
             </button>
@@ -79,76 +116,20 @@
             <option value="inne">inne</option>
           </select>
         </div>
-        <button class="add-item-btn button">
-          <span class="add-btn-text">Dodaj pozycję</span>
+        <button class="add-item-btn big-btn button">
+          <span class="big-btn-text">Dodaj pozycję</span>
           <!-- <i class="fa-solid fa-plus"></i> -->
         </button>
-        <div class="category-settings-div">
-          <ul class="categories-list flex">
-            <li class="flex space-btw">
-              <p>test1</p>
-              <button class="delete-category button">
-                <i class="fas fa-times"></i>
-              </button>
-            </li>
-            <li class="flex space-btw">
-              <p>test2</p>
-              <button class="delete-category button">
-                <i class="fas fa-times"></i>
-              </button>
-            </li>
-            <li class="flex space-btw">
-              <p>test3</p>
-              <button class="delete-category button">
-                <i class="fas fa-times"></i>
-              </button>
-            </li>
-          </ul>
-        </div>
       </div>
       <div class="table-div">
         <table class="table parameters">
           <tr>
             <th>Nazwa</th>
             <th>Opis</th>
-            <th>Cena</th>
+            <th>Cena (zł)</th>
             <th>Kategoria</th>
           </tr>
-          <tr id="1">
-            <td>przykladowa nazwa</td>
-            <td>rzykladowy opis</td>
-            <td class="price">5555</td>
-            <td>przykl kategoria</td>
-            <td class="buttons">
-              <button class="delete-button button">
-                <i class="fas fa-times"></i>
-              </button>
-            </td>
-          </tr>
-
-          <tr id="2">
-            <td>przykladowa nazwa</td>
-            <td>rzykladowy opis</td>
-            <td class="price">555</td>
-            <td>przykl kategoria</td>
-            <td class="buttons">
-              <button class="delete-button button">
-                <i class="fas fa-times"></i>
-              </button>
-            </td>
-          </tr>
-
-          <tr id="3">
-            <td>przykladowa nazwa</td>
-            <td>rzykladowy opis</td>
-            <td class="price">200</td>
-            <td>przykl kategoria</td>
-            <td class="buttons">
-              <button class="delete-button button">
-                <i class="fas fa-times"></i>
-              </button>
-            </td>
-          </tr>
+        
         </table>
         <p class="empty-list-info">Lista jest pusta. Użyj przycisku 'dodaj pozycję'</p>
       </div>
