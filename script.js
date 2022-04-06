@@ -15,7 +15,52 @@ const categoriesList = document.querySelector(".categories-list");
 const categorySettingsBtn = document.querySelector(".category-settings-btn");
 const categorySettingsCloseBtn = document.querySelector(".close-clas-edit-btn");
 const addCatBtn = document.querySelector(".add-cat-btn");
-let id = 3;
+
+// localStorage.clear();
+id = localStorage.getItem("id");
+
+const initTable = function () {
+  for (let i = 1; i <= id; i++) {
+    if (typeof localStorage[`${i}`] != "undefined") {
+      let newItemParameters = localStorage.getItem(`${i}`).split(",");
+      let newTr = document.createElement("tr");
+      newTr.setAttribute("id", `${i}`);
+
+      let newItemName = document.createElement("td");
+      newItemName.innerText = newItemParameters[0];
+
+      let newItemDescription = document.createElement("td");
+      newItemDescription.innerText = newItemParameters[1];
+
+      let newItemPrice = document.createElement("td");
+      newItemPrice.innerText = newItemParameters[2];
+
+      let newItemCategory = document.createElement("td");
+      newItemCategory.innerText = newItemParameters[3];
+
+      let newButtonTd = document.createElement("td");
+      newButtonTd.classList.add("buttons");
+
+      let newButton = document.createElement("button");
+      newButton.classList.add("delete-button");
+      newButton.classList.add("button");
+
+      // append children
+      table.appendChild(newTr);
+
+      newTr.appendChild(newItemName);
+      newTr.appendChild(newItemDescription);
+      newTr.appendChild(newItemPrice);
+      newTr.appendChild(newItemCategory);
+      newTr.appendChild(newButtonTd);
+
+      newButtonTd.appendChild(newButton);
+
+      // listener to the button
+      newButton.addEventListener("click", deleteItem);
+    }
+  }
+};
 
 const checkClick = function (e) {
   // Just testing purposes
@@ -35,7 +80,7 @@ const addItem = function () {
   if (info == "") {
     infoInput.style.border = "2px solid rgba(218, 44, 44, 0.808)";
   }
-  if (priceInput.value.length == 0) {
+  if (priceInput.value.length == 0 || priceInput.value < 0) {
     priceInput.style.border = "2px solid rgba(218, 44, 44, 0.808)";
   }
   if (selectField.value == "noAnswer") {
@@ -91,9 +136,13 @@ const addItem = function () {
     nameInput.value = "";
     priceInput.value = "";
     infoInput.value = "";
+
     // selectField.value = firstOption;   - not working
 
     checkIfEmpty();
+    localStorage.setItem(`${id}`, [name, info, price, category]);
+    localStorage.setItem("id", `${id}`);
+    itemsList.push(`${id}`);
   }
 };
 
@@ -158,6 +207,11 @@ const deleteItem = function (e) {
 
   gParent = e.target.closest("tr");
   console.log(gParent);
+
+  let itemId = gParent.getAttribute("id");
+
+  localStorage.removeItem(`${itemId}`);
+
   gParent.remove();
   checkIfEmpty();
 };
@@ -245,6 +299,7 @@ const addNewCat = function () {
   selectField.appendChild(newCat);
 
   newButton.addEventListener("click", deleteCategory);
+  newCatInput.value = "";
 };
 
 const closeCatEdit = function () {
@@ -260,6 +315,7 @@ const closeCatEdit = function () {
 // clear red-border warning that appears
 // when invalid data is in input fields
 // after input field is clicked
+
 for (input of mainInputs) {
   input.addEventListener("click", function (e) {
     for (input of mainInputs) {
@@ -292,4 +348,5 @@ document.addEventListener("click", function (e) {
 });
 
 // starting functions
+initTable();
 checkIfEmpty();
