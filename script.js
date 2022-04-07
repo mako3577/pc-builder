@@ -15,9 +15,19 @@ const categoriesList = document.querySelector(".categories-list");
 const categorySettingsBtn = document.querySelector(".category-settings-btn");
 const categorySettingsCloseBtn = document.querySelector(".close-clas-edit-btn");
 const addCatBtn = document.querySelector(".add-cat-btn");
+let summaryCost;
 
 // localStorage.clear();
 id = localStorage.getItem("id");
+
+const countPrice = function () {
+  let priceCols = document.querySelectorAll(".price");
+  summaryCost = 0;
+  for (price of priceCols) {
+    summaryCost += parseInt(price.innerText);
+  }
+  document.querySelector(".price-info").textContent = `Łączna cena to ${summaryCost} PLN.`;
+};
 
 const initTable = function () {
   for (let i = 1; i <= id; i++) {
@@ -34,6 +44,7 @@ const initTable = function () {
 
       let newItemPrice = document.createElement("td");
       newItemPrice.innerText = newItemParameters[2];
+      newItemPrice.classList.add("price");
 
       let newItemCategory = document.createElement("td");
       newItemCategory.innerText = newItemParameters[3];
@@ -42,6 +53,8 @@ const initTable = function () {
       newButtonTd.classList.add("buttons");
 
       let newButton = document.createElement("button");
+      newButton.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
+
       newButton.classList.add("delete-button");
       newButton.classList.add("button");
 
@@ -60,6 +73,7 @@ const initTable = function () {
       newButton.addEventListener("click", deleteItem);
     }
   }
+  countPrice();
 };
 
 const checkClick = function (e) {
@@ -114,6 +128,7 @@ const addItem = function () {
     let newPrice = document.createElement("td");
     newPrice.innerText = price;
     newItem.appendChild(newPrice);
+    newPrice.classList.add("price");
 
     let newCategory = document.createElement("td");
     newCategory.innerText = category;
@@ -142,7 +157,8 @@ const addItem = function () {
     checkIfEmpty();
     localStorage.setItem(`${id}`, [name, info, price, category]);
     localStorage.setItem("id", `${id}`);
-    itemsList.push(`${id}`);
+
+    countPrice();
   }
 };
 
@@ -214,14 +230,18 @@ const deleteItem = function (e) {
 
   gParent.remove();
   checkIfEmpty();
+
+  countPrice();
 };
 
 const checkIfEmpty = function () {
   let itemsInCol = table.querySelectorAll("tr");
   if (itemsInCol.length <= 1) {
     document.querySelector(".empty-list-info").classList.add("visible");
+    document.querySelector(".price-info").classList.remove("visible");
   } else {
     document.querySelector(".empty-list-info").classList.remove("visible");
+    document.querySelector(".price-info").classList.add("visible");
   }
 };
 
@@ -334,6 +354,7 @@ table.addEventListener("dblclick", editFunction);
 categorySettingsBtn.addEventListener("click", expandCategoriesSettings);
 addCatBtn.addEventListener("click", addNewCat);
 categorySettingsCloseBtn.addEventListener("click", closeCatEdit);
+// table.addEventListener("click", choseItem);
 
 for (let delBtn of delBtns) {
   delBtn.addEventListener("click", deleteItem);
@@ -350,3 +371,4 @@ document.addEventListener("click", function (e) {
 // starting functions
 initTable();
 checkIfEmpty();
+countPrice();

@@ -96,10 +96,8 @@
 }
 
 .table {
-  column-gap: 1 / -1;
   font-size: 16px;
   border-collapse: separate;
-  /* border-spacing: 55px 15px; */
   width: 100%;
 }
 
@@ -206,7 +204,19 @@ button i {
   text-align: center;
 }
 
+.price-info {
+  display: none;
+  font-size: 20px;
+  padding: 13px 26px;
+  text-align: center;
+  background-color: rgba(68, 68, 68, 0.26);
+}
+
 .empty-list-info.visible {
+  display: block;
+}
+
+.price-info.visible {
   display: block;
 }
 
