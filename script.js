@@ -11,11 +11,38 @@ const firstOption = document.querySelector("option");
 const editBtn = document.querySelector(".edit-button");
 // 4 main inputs from top side of the app
 const mainInputs = document.querySelectorAll(".input-field");
+
+// generated automatically when 'categoriesSettingsBtn' clicked
 const categoriesList = document.querySelector(".categories-list");
 const categorySettingsBtn = document.querySelector(".category-settings-btn");
 const categorySettingsCloseBtn = document.querySelector(".close-clas-edit-btn");
 const addCatBtn = document.querySelector(".add-cat-btn");
 let summaryCost;
+
+// those are basic select options. Created only if user hasn't his own options in localStorage.
+let basicCategories = ["Podzespoły komputera", "Urządzenia peryferyjne", "oprogramowanie", "inne"];
+
+let catId = "0";
+console.log(catId);
+if (typeof localStorage.getItem("catId") != "undefined" && localStorage.getItem("catId") != null) {
+  catId = localStorage.getItem("catId");
+}
+console.log(catId);
+
+const categoriesInit = function () {
+  for (let category of basicCategories) {
+    catId++;
+    newCategory = document.createElement("option");
+    newCategory.setAttribute("value", `${category}`);
+    newCategory.innerText = `${category}`;
+
+    newCategory.setAttribute("id", catId);
+
+    localStorage.setItem(`cat${catId}`, newCategory.innerText);
+    selectField.appendChild(newCategory);
+  }
+  localStorage.setItem("catId", catId);
+};
 
 // localStorage.clear();
 id = localStorage.getItem("id");
@@ -276,16 +303,19 @@ const createCategoriesList = function () {
 };
 const deleteCategory = function (e) {
   let liToDel = e.target.closest("li");
-
   textInside = e.target.closest("button").previousSibling.innerText;
-  console.log(textInside);
-
-  liToDel.remove();
-
   optionToDel = document.querySelector(`[value ='${textInside}'`);
-  optionToDel.remove();
 
-  // document.querySelector(".category-settings-div").classList.toggle("active");
+  let id = optionToDel.getAttribute("id");
+
+  if (textInside == "inne" && document.querySelectorAll(`[value ='${textInside}'`).length == 1) {
+    console.log("return");
+  } else {
+    optionToDel.remove();
+    // delete category from localStorage
+    localStorage.removeItem(`cat${id}`);
+    liToDel.remove();
+  }
 };
 
 const expandCategoriesSettings = function () {
@@ -295,31 +325,46 @@ const expandCategoriesSettings = function () {
 
 const addNewCat = function () {
   let newCatInput = document.querySelector(".new-cat-input");
+
   let newCatText = newCatInput.value;
-  let newCatLi = document.createElement("li");
-  let newP = document.createElement("p");
-  newP.innerText = newCatText;
+  if (newCatText.length > 1) {
+    let newCatLi = document.createElement("li");
+    let newP = document.createElement("p");
+    newP.innerText = newCatText;
+    const newButton = document.createElement("button");
+    newButton.classList.add("delete-category");
+    newButton.classList.add("button");
+    newButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
 
-  const newButton = document.createElement("button");
-  newButton.classList.add("delete-category");
-  newButton.classList.add("button");
-  newButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+    newCatLi.classList.add("space-btw");
+    newCatLi.classList.add("flex");
 
-  newCatLi.classList.add("space-btw");
-  newCatLi.classList.add("flex");
+    let newCat = document.createElement("option");
+    // set attribute of new category
+    // to make saving it in localStorage possible
+    catId++;
+    newCat.setAttribute("id", catId);
+    newCat.value = newCatText;
+    newCat.innerText = newCatText;
 
-  newCat = document.createElement("option");
-  newCat.value = newCatText;
-  newCat.innerText = newCatText;
+    newCatLi.appendChild(newP);
+    newCatLi.appendChild(newButton);
+    categoriesList.appendChild(newCatLi);
 
-  newCatLi.appendChild(newP);
-  newCatLi.appendChild(newButton);
-  categoriesList.appendChild(newCatLi);
+    selectField.appendChild(newCat);
 
-  selectField.appendChild(newCat);
+    newButton.addEventListener("click", deleteCategory);
+    newCatInput.value = "";
 
-  newButton.addEventListener("click", deleteCategory);
-  newCatInput.value = "";
+    console.log(`cat${catId}`, newCatText);
+    localStorage.setItem(`cat${catId}`, newCatText);
+    localStorage.setItem("catId", catId);
+  } else {
+    newCatInput.style.border = "2px solid rgba(218, 44, 44, 0.808)";
+    newCatInput.addEventListener("click", function () {
+      newCatInput.style.border = "black solid 1px";
+    });
+  }
 };
 
 const closeCatEdit = function () {
@@ -372,3 +417,26 @@ document.addEventListener("click", function (e) {
 initTable();
 checkIfEmpty();
 countPrice();
+
+// if (currentCategories == undefined) {
+
+const createOptions = function () {
+  if (typeof catId != "undefined" && catId > 1) {
+    for (let i = 0; i <= catId; i++) {
+      if (typeof localStorage[`cat${i}`] != "undefined") {
+        console.log("i", i);
+        let newCat = document.createElement("option");
+
+        newCat.setAttribute("id", i);
+        newCat.value = localStorage.getItem(`cat${i}`);
+        newCat.innerText = localStorage.getItem(`cat${i}`);
+
+        selectField.appendChild(newCat);
+      }
+    }
+  } else {
+    categoriesInit();
+  }
+};
+
+createOptions();
